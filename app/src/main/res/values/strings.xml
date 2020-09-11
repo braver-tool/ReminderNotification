@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">My Reminders</string>
+    <string name="imge_desc">img_desc</string>
+
+    <!--   My Reminder -->
+    <string name="my_reminder_title">My Reminders</string>
+    <string name="sample_time">10:24 AM</string>
+    <string name="reminder_title_">Reminder Title</string>
+
+    <!--   Add Reminder -->
+    <string name="reminder_title">Add Reminder</string>
+    <string name="title">Title</string>
+    <string name="abt_reminder">About Reminder</string>
+    <string name="reminder_date">Reminder Date</string>
+    <string name="reminder_time">Reminder Time</string>
+    <string name="alert_before">Alert Before (Minutes)</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
+    <string name="cast_tracks_chooser_dialog_ok">OK</string>
+</resources>

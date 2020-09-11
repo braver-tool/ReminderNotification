@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:tag="weekRow2"
+    android:weightSum="7">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cellHeight"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/margin"
+        android:layout_weight="1"
+        android:background="@drawable/un_selected_date_bg"
+        android:tag="dayOfMonthContainer8">
+
+        <com.calendar.android.calendar.DayView
+            style="@style/CalendarView.DayOfTheMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:tag="dayOfMonthText8"
+            android:text="@string/eight" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/margin"
+        android:layout_weight="1"
+        android:background="@drawable/un_selected_date_bg"
+        android:tag="dayOfMonthContainer9">
+
+        <com.calendar.android.calendar.DayView
+            style="@style/CalendarView.DayOfTheMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:tag="dayOfMonthText9"
+            android:text="@string/nine" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/margin"
+        android:layout_weight="1"
+        android:background="@drawable/un_selected_date_bg"
+        android:tag="dayOfMonthContainer10">
+
+        <com.calendar.android.calendar.DayView
+            style="@style/CalendarView.DayOfTheMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:tag="dayOfMonthText10"
+            android:text="@string/ten" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/margin"
+        android:layout_weight="1"
+        android:background="@drawable/un_selected_date_bg"
+        android:tag="dayOfMonthContainer11">
+
+        <com.calendar.android.calendar.DayView
+            style="@style/CalendarView.DayOfTheMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:tag="dayOfMonthText11"
+            android:text="@string/eleven" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/margin"
+        android:layout_weight="1"
+        android:background="@drawable/un_selected_date_bg"
+        android:tag="dayOfMonthContainer12">
+
+        <com.calendar.android.calendar.DayView
+            style="@style/CalendarView.DayOfTheMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:tag="dayOfMonthText12"
+            android:text="@string/twelve" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/margin"
+        android:layout_weight="1"
+        android:background="@drawable/un_selected_date_bg"
+        android:tag="dayOfMonthContainer13">
+
+        <com.calendar.android.calendar.DayView
+            style="@style/CalendarView.DayOfTheMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:tag="dayOfMonthText13"
+            android:text="@string/thirteen" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/margin"
+        android:layout_weight="1"
+        android:background="@drawable/un_selected_date_bg"
+        android:tag="dayOfMonthContainer14">
+
+        <com.calendar.android.calendar.DayView
+            style="@style/CalendarView.DayOfTheMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:tag="dayOfMonthText14"
+            android:text="@string/fourteen" />
+    </RelativeLayout>
+
+</LinearLayout>

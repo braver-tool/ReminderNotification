@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:id="@+id/deleteCustomDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/customDialogDeleteCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12sp"
+            android:paddingEnd="12sp"
+            app:cardBackgroundColor="#f4efef"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/alertMsgTextView"
+                    android:layout_width="@dimen/_210sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:fontFamily="@font/roboto"
+                    android:padding="12sp"
+                    android:textColor="@color/grey_six"
+                    android:textSize="@dimen/_14sdp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#161d20"
+                    android:orientation="horizontal" />
+
+                <TextView
+                    android:id="@+id/alertDialogOkTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:fontFamily="@font/roboto"
+                    android:padding="12sp"
+                    android:text="@string/cast_tracks_chooser_dialog_ok"
+                    android:textColor="@color/color_red"
+                    android:textSize="@dimen/_16sdp" />
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</LinearLayout>
+

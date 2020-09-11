@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/calenderParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/calenderUpArrowGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:background="@drawable/up_arrow_calendar_greenicon"
+            android:contentDescription="@string/app_name" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_11sdp"
+            android:layout_marginBottom="-10dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="@dimen/_8sdp">
+
+
+            <com.calendar.android.calendar.CustomCalendarView
+                android:id="@+id/calendar_view"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:background="@drawable/title_layout_bg"
+                android:paddingBottom="@dimen/_8sdp"
+                app:calendarTitleTextColor="@color/white"
+                app:currentDayOfMonthColor="#4F4F4F"
+                app:dayOfWeekTextColor="@color/white"
+                app:days="@color/colorAccent"
+                app:disabledDayBackgroundColor="@color/green"
+                app:selectedDayBackgroundColor="@color/yellow"
+                app:titleLayoutBackgroundColor="#4F4F4F"
+                app:weekLayoutBackgroundColor="@color/white" />
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</RelativeLayout>

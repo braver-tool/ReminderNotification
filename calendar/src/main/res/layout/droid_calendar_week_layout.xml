@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/daysContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:background="@drawable/btm_line"
+            android:orientation="vertical"
+            android:paddingTop="2sp"
+            android:tag="dayOfTheWeekLayout1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText1"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp"
+                tools:text="Mo" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText1"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btm_line"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingTop="2sp"
+            android:tag="dayOfTheWeekLayout2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText2"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp"
+                tools:text="Tu" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText1"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btm_line"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingTop="2sp"
+            android:tag="dayOfTheWeekLayout3">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText3"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp"
+                tools:text="We" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText1"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btm_line"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingTop="2sp"
+            android:tag="dayOfTheWeekLayout4">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText4"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp"
+                tools:text="Th" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText1"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btm_line"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingTop="2sp"
+
+            android:tag="dayOfTheWeekLayout5">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText5"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp"
+                tools:text="Fr" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText1"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btm_line"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingTop="2sp"
+            android:tag="dayOfTheWeekLayout6">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText6"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp"
+                tools:text="Sa" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText1"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btm_line"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingTop="2sp"
+            android:tag="dayOfTheWeekLayout7">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText7"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp"
+                tools:text="Su" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:tag="dayOfTheWeekText1"
+                android:textColor="@color/roboto_calendar_day_of_the_week_font"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+

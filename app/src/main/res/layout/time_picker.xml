@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_260sdp"
+    android:layout_height="@dimen/_220sdp"
+    android:layout_gravity="center"
+    android:background="@drawable/rounded_corner_time_picker_bg_white">
+
+    <TimePicker
+        android:id="@+id/CommontimePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:descendantFocusability="blocksDescendants"
+        android:fontFamily="@font/roboto"
+        android:scaleX="1.25"
+        android:scaleY="1.15"
+        android:timePickerMode="spinner" />
+
+    <TextView
+        android:id="@+id/CommonTimePickerOkText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/_25sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:text="@string/cast_tracks_chooser_dialog_ok"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18sdp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/CommonTimePickerCancelText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:layout_toStartOf="@+id/CommonTimePickerOkText"
+        android:text="@string/cancel"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18sdp"
+        android:textStyle="bold" />
+</RelativeLayout>
+
+

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/weekTitlePaddingBottom"
+    android:paddingBottom="@dimen/weekTitlePaddingTop">
+
+    <TextView
+        style="@style/CalendarView.DayOfTheWeek"
+        android:layout_weight="1"
+        android:fontFamily="@font/roboto"
+        android:tag="dayOfWeek1"
+        android:text="@string/sun"
+        android:textColor="@color/calender_dark_blue" />
+
+    <TextView
+        style="@style/CalendarView.DayOfTheWeek"
+        android:layout_weight="0.8"
+        android:fontFamily="@font/roboto"
+        android:tag="dayOfWeek2"
+        android:text="@string/mon"
+        android:textColor="@color/calender_dark_blue" />
+
+    <TextView
+        style="@style/CalendarView.DayOfTheWeek"
+        android:layout_weight="0.5"
+        android:fontFamily="@font/roboto"
+        android:tag="dayOfWeek3"
+        android:text="@string/tue"
+        android:textColor="@color/calender_dark_blue" />
+
+    <TextView
+        style="@style/CalendarView.DayOfTheWeek"
+        android:layout_weight="1"
+        android:fontFamily="@font/roboto"
+        android:tag="dayOfWeek4"
+        android:text="@string/wed"
+        android:textColor="@color/calender_dark_blue" />
+
+    <TextView
+        style="@style/CalendarView.DayOfTheWeek"
+        android:layout_weight="0.6"
+        android:fontFamily="@font/roboto"
+        android:tag="dayOfWeek5"
+        android:text="@string/thu"
+        android:textColor="@color/calender_dark_blue" />
+
+    <TextView
+        style="@style/CalendarView.DayOfTheWeek"
+        android:layout_weight="1.3"
+        android:fontFamily="@font/roboto"
+        android:tag="dayOfWeek6"
+        android:text="@string/fri"
+        android:textColor="@color/calender_dark_blue" />
+
+    <TextView
+        style="@style/CalendarView.DayOfTheWeek"
+        android:layout_weight="1"
+        android:fontFamily="@font/roboto"
+        android:tag="dayOfWeek7"
+        android:text="@string/sat"
+        android:textColor="@color/calender_dark_blue" />
+</LinearLayout>

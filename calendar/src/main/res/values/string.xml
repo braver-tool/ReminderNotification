@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="desc">desc</string>
+    <string name="samp_month">November 2018</string>
+
+
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+
+
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="ten">10</string>
+    <string name="eleven">11</string>
+    <string name="twelve">12</string>
+    <string name="thirteen">13</string>
+    <string name="fourteen">14</string>
+
+    <string name="fifteen">15</string>
+    <string name="sixteen">16</string>
+    <string name="seventeen">17</string>
+    <string name="eighteen">18</string>
+    <string name="ninteen">19</string>
+    <string name="twenty">20</string>
+    <string name="twentyone">21</string>
+
+
+    <string name="twentytwo">22</string>
+    <string name="twentythree">23</string>
+    <string name="twentyfour">24</string>
+    <string name="twentyfive">25</string>
+    <string name="twentysix">26</string>
+    <string name="twentyseven">27</string>
+    <string name="twentyeight">28</string>
+
+    <string name="twentynine">29</string>
+    <string name="thirty">30</string>
+    <string name="thirtyone">31</string>
+    <string name="thirtytwo">32</string>
+    <string name="thirtythree">33</string>
+    <string name="thirtyfour">34</string>
+    <string name="thirtyfive">35</string>
+
+    <string name="thirtysix">36</string>
+    <string name="thirtyseven">37</string>
+    <string name="thirtyeight">38</string>
+    <string name="thirtynine">39</string>
+    <string name="forty">40</string>
+    <string name="fortyone">41</string>
+    <string name="fortytwo">42</string>
+
+</resources>
