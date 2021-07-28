@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 ~ https://github.com/braver-tool
+ */
+
 package com.android.mysimplecalendar.localdb;
 
 
@@ -6,9 +10,7 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
-/**
- * Created by Hariharan Eswaran on 01/01/2019
- */
+
 @Table(database = LocalDataBase.class)
 public class MyNotifications extends BaseModel {
 

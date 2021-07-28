@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 ~ https://github.com/braver-tool
+ */
+
 package com.android.mysimplecalendar.adapter;
 
 import android.annotation.SuppressLint;
@@ -21,19 +25,17 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.List;
 
-import static com.android.mysimplecalendar.utils.AppUtils.ACTION_CANCEL_BUTTON_FROM_ALERT_POPUP;
 import static com.android.mysimplecalendar.utils.AppUtils.ACTION_EDIT_REMINDER;
 import static com.android.mysimplecalendar.utils.AppUtils.ACTION_OK_BUTTON_FROM_ALERT_POPUP;
 import static com.android.mysimplecalendar.utils.AppUtils.DELETE_REMINDER_ALERT;
 import static com.android.mysimplecalendar.utils.AppUtils.FAVORITE_REMINDER_ALERT;
 import static com.android.mysimplecalendar.utils.AppUtils.NOT_EDITABLE_REMINDER_ALERT;
-import static com.android.mysimplecalendar.utils.AppUtils.PREF_SELECTED_NOTIFICATION_ID_HOME;
 
 
 public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.MyViewHolder> {
-    private Context mContext;
-    private List<NotificationModel> notificationModelList;
-    private DataListener dataListener;
+    private final Context mContext;
+    private final List<NotificationModel> notificationModelList;
+    private final DataListener dataListener;
     private int deletedPos = -1;
     private int favPos = -1;
 
@@ -101,8 +103,12 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.MyVi
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, DataListener {
-        private TextView myReminderTimeTextView, reminderTitle, aboutReminderTextView;
-        private ImageView editReminderImageView, addToFavReminderImageView, deleteReminderImageView;
+        private final TextView myReminderTimeTextView;
+        private final TextView reminderTitle;
+        private final TextView aboutReminderTextView;
+        private final ImageView editReminderImageView;
+        private final ImageView addToFavReminderImageView;
+        private final ImageView deleteReminderImageView;
 
 
         public MyViewHolder(View v) {
@@ -125,32 +131,29 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.MyVi
          */
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.editReminderImageView:
-                    int editPos = (int) v.getTag();
-                    boolean isEditable = notificationModelList.get(editPos).isEditable();
-                    if (isEditable) {
-                        dataListener.sendData(ACTION_EDIT_REMINDER, notificationModelList.get(editPos).getID());
-                    } else {
-                        AppUtils.showAlertMsgDialog(NOT_EDITABLE_REMINDER_ALERT, mContext);
-                    }
-                    break;
-                case R.id.deleteReminderImageView:
-                    deletedPos = (int) v.getTag();
-                    favPos = -1;
-                    AppUtils.showAlertDialogWidTwoWidget(mContext, this, DELETE_REMINDER_ALERT);
-                    break;
-                case R.id.addToFavReminderImageView:
-                    favPos = (int) v.getTag();
-                    boolean isFavorite = notificationModelList.get(favPos).isFavorite();
-                    if (!isFavorite) {
-                        deletedPos = -1;
-                        AppUtils.showAlertDialogWidTwoWidget(mContext, this, FAVORITE_REMINDER_ALERT);
-                    } else {
-                        updateFavInLocal(false);
-                        favViewChange();
-                    }
-                    break;
+            int id = v.getId();
+            if (id == R.id.editReminderImageView) {
+                int editPos = (int) v.getTag();
+                boolean isEditable = notificationModelList.get(editPos).isEditable();
+                if (isEditable) {
+                    dataListener.sendData(ACTION_EDIT_REMINDER, notificationModelList.get(editPos).getID());
+                } else {
+                    AppUtils.showAlertMsgDialog(NOT_EDITABLE_REMINDER_ALERT, mContext);
+                }
+            } else if (id == R.id.deleteReminderImageView) {
+                deletedPos = (int) v.getTag();
+                favPos = -1;
+                AppUtils.showAlertDialogWidTwoWidget(mContext, this, DELETE_REMINDER_ALERT);
+            } else if (id == R.id.addToFavReminderImageView) {
+                favPos = (int) v.getTag();
+                boolean isFavorite = notificationModelList.get(favPos).isFavorite();
+                if (!isFavorite) {
+                    deletedPos = -1;
+                    AppUtils.showAlertDialogWidTwoWidget(mContext, this, FAVORITE_REMINDER_ALERT);
+                } else {
+                    updateFavInLocal(false);
+                    favViewChange();
+                }
             }
         }
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 ~ https://github.com/braver-tool
+ */
+
 package com.android.mysimplecalendar.fragments;
 
 import android.graphics.Color;
@@ -25,9 +29,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-/**
- * Created by Hariharan Eswaran on 01/01/2019
- */
+
 
 public class CalenderDialogFragment extends DialogFragment {
     private static final String TAG = CalenderDialogFragment.class.getSimpleName();

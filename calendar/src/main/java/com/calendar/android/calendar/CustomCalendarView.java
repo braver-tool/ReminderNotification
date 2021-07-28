@@ -22,9 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Created by Hariharan Eswaran on 01/01/2019
- */
+
 
 public class CustomCalendarView extends LinearLayout {
     private static final String DAY_OF_WEEK = "dayOfWeek";

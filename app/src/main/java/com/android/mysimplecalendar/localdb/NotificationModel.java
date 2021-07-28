@@ -1,9 +1,10 @@
+/*
+ * Copyright 2019 ~ https://github.com/braver-tool
+ */
+
 package com.android.mysimplecalendar.localdb;
 
 
-/**
- * Created by Hariharan Eswaran on 01/01/2019
- */
 public class NotificationModel {
     private String ReminderDateTime;
     private String ID;
@@ -102,4 +103,5 @@ public class NotificationModel {
         this.isEditable = isEditable;
         this.isDeletable = isDeletable;
     }
+
 }

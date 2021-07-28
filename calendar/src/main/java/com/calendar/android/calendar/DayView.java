@@ -1,9 +1,7 @@
 package com.calendar.android.calendar;
 
 
-/**
- * Created by Hariharan Eswaran on 01/01/2019
- */
+
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 ~ https://github.com/braver-tool
+ */
+
 package com.android.mysimplecalendar.activities;
 
 import android.app.Dialog;
@@ -19,7 +23,7 @@ import com.android.mysimplecalendar.fragments.CalenderDialogFragment;
 import com.android.mysimplecalendar.localdb.LocalDataBase;
 import com.android.mysimplecalendar.localdb.MyNotifications;
 import com.android.mysimplecalendar.localdb.MyNotifications_Table;
-import com.android.mysimplecalendar.notifications.NotificationUtils;
+import com.android.mysimplecalendar.notifications.LocalNotificationReceiver;
 import com.android.mysimplecalendar.utils.AppUtils;
 import com.android.mysimplecalendar.utils.PreferencesManager;
 import com.google.android.material.snackbar.Snackbar;
@@ -43,11 +47,9 @@ import java.util.UUID;
 import static com.android.mysimplecalendar.utils.AppUtils.PREF_SELECTED_DATE_HOME;
 import static com.android.mysimplecalendar.utils.AppUtils.PREF_SELECTED_NOTIFICATION_ID_HOME;
 
-/**
- * Created by Hariharan Eswaran on 01/01/2019
- */
+
 public class AddReminderActivity extends AppCompatActivity implements View.OnClickListener, CalenderDialogFragment.onDateSelected {
-    private String TAG = AddReminderActivity.class.getSimpleName();
+    private final String TAG = AddReminderActivity.class.getSimpleName();
     private EditText reminderTitleEditText, reminderAboutEditText, reminderAlertEditText;
     private TextView reminderDateTextView;
     private TextView reminderTimeTextView;
@@ -58,7 +60,7 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
     private boolean isEditableNotification = false;
     private boolean isSubmitClicked = false;
     private MyNotifications myNotifications;
-    private NotificationUtils notificationUtils;
+    private LocalNotificationReceiver localNotificationReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,24 +89,18 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.reminderDateTextView:
-                getDateFromCalendar();
-                break;
-            case R.id.reminderTimeTextView:
-                getTimeFromPicker();
-                break;
-            case R.id.reminderDoneTextView:
-                if (!isSubmitClicked) {
-                    saveReminderToLocalDatabase();
-                }
-                break;
-            case R.id.reminderCancelTextView:
-                onBackPressed();
-                break;
-
+        int id = v.getId();
+        if (id == R.id.reminderDateTextView) {
+            getDateFromCalendar();
+        } else if (id == R.id.reminderTimeTextView) {
+            getTimeFromPicker();
+        } else if (id == R.id.reminderDoneTextView) {
+            if (!isSubmitClicked) {
+                saveReminderToLocalDatabase();
+            }
+        } else if (id == R.id.reminderCancelTextView) {
+            onBackPressed();
         }
-
     }
 
 
@@ -123,7 +119,7 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
                 if (isEditableNotification) {
                     if (myNotifications != null) {
                         isFav = myNotifications.isFavorite();
-                        notificationUtils.clearLocalNotification(this, myNotifications.getNotificationID());
+                        localNotificationReceiver.clearLocalNotification(AddReminderActivity.this, myNotifications.getNotificationID());
                         SQLite.delete(MyNotifications.class)
                                 .where(MyNotifications_Table.ID.eq(myNotifications.getID()))
                                 .async()
@@ -146,7 +142,7 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
                     List<MyNotifications> mdNotificationsList = notificationsStringQuery.queryList();
                     if (mdNotificationsList.size() > 0) {
                         for (int i = 0; i < mdNotificationsList.size(); i++) {
-                            notificationUtils.scheduleNotificationModel(mdNotificationsList.get(i));
+                            localNotificationReceiver.scheduleNotificationModel(AddReminderActivity.this, mdNotificationsList.get(i));
                         }
                         String alertMsg = isEditableNotification ? "Reminder Updated!!" : "Reminder Scheduled Success!!";
                         Snackbar snackbar = Snackbar.make(addTotalRelativeLayout, alertMsg, Snackbar.LENGTH_LONG);
@@ -281,7 +277,7 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
         reminderTimeTextView.setOnClickListener(this);
         reminderDoneTextView.setOnClickListener(this);
         reminderCancelTextView.setOnClickListener(this);
-        notificationUtils = new NotificationUtils(this);
+        localNotificationReceiver = new LocalNotificationReceiver();
 
         reminderAboutEditText.addTextChangedListener(new TextWatcher() {
             @Override

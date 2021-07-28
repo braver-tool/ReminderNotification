@@ -3,9 +3,7 @@ package com.calendar.android.calendar.utils;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by Hariharan Eswaran on 01/01/2019
- */
+
 
 public class CalendarUtils {
 

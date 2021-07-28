@@ -22,9 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * Created by Hariharan Eswaran on 01/01/2019
- */
+
 public class DroidCalendarView extends LinearLayout {
 
     private static final String DAY_OF_THE_WEEK_TEXT = "dayOfTheWeekText";

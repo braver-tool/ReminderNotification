@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 ~ https://github.com/braver-tool
+ */
+
 package com.android.mysimplecalendar.activities;
 
 import android.os.Bundle;
@@ -34,9 +38,7 @@ import static com.android.mysimplecalendar.utils.AppUtils.ACTION_EDIT_REMINDER;
 import static com.android.mysimplecalendar.utils.AppUtils.PREF_SELECTED_DATE_HOME;
 import static com.android.mysimplecalendar.utils.AppUtils.PREF_SELECTED_NOTIFICATION_ID_HOME;
 
-/**
- * Created by Hariharan Eswaran on 01/01/2019
- */
+
 public class MainActivity extends AppCompatActivity implements DroidCalendarView.DroidCalendarListener, DataListener, View.OnClickListener {
     private DroidCalendarView calendarView;
     private Calendar currentCalendar = Calendar.getInstance();
@@ -45,9 +47,9 @@ public class MainActivity extends AppCompatActivity implements DroidCalendarView
     private SuperscriptFormatter superscriptFormatter;
     private RecyclerView calenderRecyclerView;
     private PreferencesManager prefManager;
-    private SimpleDateFormat ymd_date_format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-    private SimpleDateFormat dmy_date_format = new SimpleDateFormat("MMM dd yyyy", Locale.getDefault());
-    private SimpleDateFormat month_format = new SimpleDateFormat("MMM", Locale.getDefault());
+    private final SimpleDateFormat ymd_date_format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    private final SimpleDateFormat dmy_date_format = new SimpleDateFormat("MMM dd yyyy", Locale.getDefault());
+    private final SimpleDateFormat month_format = new SimpleDateFormat("MMM", Locale.getDefault());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +72,9 @@ public class MainActivity extends AppCompatActivity implements DroidCalendarView
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.noRemindersTextView:
-            case R.id.addReminderImageView:
-                AppUtils.navigateUtils(MainActivity.this, AddReminderActivity.class);
-                break;
+        int id = v.getId();
+        if (id == R.id.noRemindersTextView || id == R.id.addReminderImageView) {
+            AppUtils.navigateUtils(MainActivity.this, AddReminderActivity.class);
         }
     }
 

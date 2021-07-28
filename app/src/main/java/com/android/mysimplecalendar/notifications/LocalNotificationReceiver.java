@@ -1,7 +1,12 @@
+/*
+ * Copyright 2019 ~ https://github.com/braver-tool
+ */
+
 package com.android.mysimplecalendar.notifications;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -21,17 +26,22 @@ import androidx.core.app.NotificationCompat;
 import com.android.mysimplecalendar.R;
 import com.android.mysimplecalendar.activities.MainActivity;
 import com.android.mysimplecalendar.localdb.MyNotifications;
+import com.android.mysimplecalendar.localdb.MyNotifications_Table;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 
-/**
- * Created by Hariharan Eswaran on 01/01/2019
- */
+
 public class LocalNotificationReceiver extends BroadcastReceiver {
     public static final String CHANNEL_ID = "mycalendar_channel_id";
     public static final String CHANNEL_NAME = "mycalendar_channel_name";
@@ -57,15 +67,13 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
             Intent notificationIntent;
             notificationIntent = new Intent(context, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT);
-
-
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             Notification.Builder builder = new Notification.Builder(context);
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             String title = "You scheduled " + myNotifications.getReminderTitle() + " at " + myNotifications.getReminderTime();
             Notification notification = builder.setContentTitle(title)
                     .setSmallIcon(getNotificationIcon())
-                    .setStyle(new Notification.BigTextStyle().bigText(myNotifications.getReminderDetails()))
+                    .setContentText(myNotifications.getReminderDetails())
                     .setDefaults(Notification.DEFAULT_ALL)
                     .setAutoCancel(true)
                     .setSound(defaultSoundUri)
@@ -88,6 +96,56 @@ public class LocalNotificationReceiver extends BroadcastReceiver {
             Objects.requireNonNull(notificationManager).notify(myNotifications.getNotificationID(), notification);
         } catch (NullPointerException | IllegalStateException e) {
             Log.d("##Error", Objects.requireNonNull(e.getMessage()));
+        }
+    }
+
+    /**
+     * Schedules an alarm using {@link AlarmManager}.
+     *
+     * @param myNotifications the alarm to be scheduled
+     */
+    public void scheduleNotificationModel(Context context, MyNotifications myNotifications) {
+        AlarmManager mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        String data = new Gson().toJson(myNotifications, MyNotifications.class);
+        Intent intent = new Intent(context, LocalNotificationReceiver.class);
+        intent.putExtra("DATA", data);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, myNotifications.getNotificationID(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Calendar alarmTime = Calendar.getInstance();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+        Date date;
+        try {
+            date = timeFormat.parse(myNotifications.getReminderDateTime());
+            if (date != null) {
+                alarmTime.setTime(date);
+            }
+            if (mAlarmManager != null) {
+                if (Build.VERSION.SDK_INT >= 23) {
+                    mAlarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
+                } else {
+                    mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), pendingIntent);
+                }
+            }
+            SQLite.update(MyNotifications.class)
+                    .set(MyNotifications_Table.isScheduled.eq(true))
+                    .where(MyNotifications_Table.ID.eq(myNotifications.getID()))
+                    .async()
+                    .execute();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param context        - current screen
+     * @param notificationID - int data
+     *                       Method used to cancel scheduled notification
+     */
+    public void clearLocalNotification(Context context, int notificationID) {
+        AlarmManager mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, LocalNotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, notificationID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        if (mAlarmManager != null) {
+            mAlarmManager.cancel(pendingIntent);
         }
     }
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 ~ https://github.com/braver-tool
+ */
+
 package com.android.mysimplecalendar.localdb;
 
 
@@ -8,9 +12,7 @@ import com.raizlabs.android.dbflow.sqlcipher.SQLCipherOpenHelper;
 import com.raizlabs.android.dbflow.structure.database.DatabaseHelperListener;
 import com.raizlabs.android.dbflow.structure.database.OpenHelper;
 
-/**
- * Created by Hariharan Eswaran on 01/01/2019
- */
+
 @Database(name = LocalDataBase.NAME, version = LocalDataBase.VERSION)
 public class LocalDataBase {
     static final String NAME = "MySqlite";

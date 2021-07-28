@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 ~ https://github.com/braver-tool
+ */
+
 package com.android.mysimplecalendar.utils;
 
 import android.app.Activity;
@@ -22,9 +26,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-/**
- * Created by Hariharan Eswaran on 01/01/2019
- */
+
 public class AppUtils {
     public static final int ACTION_EDIT_REMINDER = 111;
     public static final int ACTION_OK_BUTTON_FROM_ALERT_POPUP = 112;
