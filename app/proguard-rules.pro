@@ -19,8 +19,3 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-# Dbflow Module Proguard Rule
--keep class com.raizlabs.android.dbflow.config.GeneratedDatabaseHolder
--keep class * extends com.raizlabs.android.dbflow.config.DatabaseHolder { *; }
--keepattributes *Annotation*
--keep public class * extends java.lang.Exception

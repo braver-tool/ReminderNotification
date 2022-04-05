@@ -1,8 +1,18 @@
 /*
- * Copyright 2019 ~ https://github.com/braver-tool
+ *
+ *  * Created by https://github.com/braver-tool on 11/09/20, 03:30 PM
+ *  * Copyright (c) 2022 . All rights reserved.
+ *  * Last modified 05/04/22, 11:00 AM
+ *
  */
 
 package com.android.mysimplecalendar.adapter;
+
+import static com.android.mysimplecalendar.utils.AppUtils.ACTION_EDIT_REMINDER;
+import static com.android.mysimplecalendar.utils.AppUtils.ACTION_OK_BUTTON_FROM_ALERT_POPUP;
+import static com.android.mysimplecalendar.utils.AppUtils.DELETE_REMINDER_ALERT;
+import static com.android.mysimplecalendar.utils.AppUtils.FAVORITE_REMINDER_ALERT;
+import static com.android.mysimplecalendar.utils.AppUtils.NOT_EDITABLE_REMINDER_ALERT;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,33 +27,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.mysimplecalendar.R;
 import com.android.mysimplecalendar.listener.DataListener;
-import com.android.mysimplecalendar.localdb.MyNotifications;
-import com.android.mysimplecalendar.localdb.MyNotifications_Table;
-import com.android.mysimplecalendar.localdb.NotificationModel;
+import com.android.mysimplecalendar.localdb.MCNotification;
+import com.android.mysimplecalendar.localdb.NotificationRepository;
 import com.android.mysimplecalendar.utils.AppUtils;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.List;
-
-import static com.android.mysimplecalendar.utils.AppUtils.ACTION_EDIT_REMINDER;
-import static com.android.mysimplecalendar.utils.AppUtils.ACTION_OK_BUTTON_FROM_ALERT_POPUP;
-import static com.android.mysimplecalendar.utils.AppUtils.DELETE_REMINDER_ALERT;
-import static com.android.mysimplecalendar.utils.AppUtils.FAVORITE_REMINDER_ALERT;
-import static com.android.mysimplecalendar.utils.AppUtils.NOT_EDITABLE_REMINDER_ALERT;
 
 
 public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.MyViewHolder> {
     private final Context mContext;
-    private final List<NotificationModel> notificationModelList;
+    private final List<MCNotification> notificationModelList;
     private final DataListener dataListener;
     private int deletedPos = -1;
     private int favPos = -1;
+    private final NotificationRepository notificationRepository;
 
 
-    public RemindersAdapter(Context mContext, DataListener listener, List<NotificationModel> notificationModels) {
+    public RemindersAdapter(Context mContext, NotificationRepository repository, DataListener listener, List<MCNotification> notificationModels) {
         this.mContext = mContext;
         this.notificationModelList = notificationModels;
         this.dataListener = listener;
+        this.notificationRepository = repository;
     }
 
     /**
@@ -76,7 +80,7 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.MyVi
     @SuppressLint({"ResourceType", "ClickableViewAccessibility"})
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        NotificationModel notificationModel = notificationModelList.get(position);
+        MCNotification notificationModel = notificationModelList.get(position);
         if (notificationModel != null) {
             holder.myReminderTimeTextView.setText(notificationModel.getReminderTime());
             holder.reminderTitle.setText(notificationModel.getReminderTitle());
@@ -164,17 +168,13 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.MyVi
                     if (deletedPos != -1 && favPos == -1) {
                         notificationModelList.remove(deletedPos);
                         notifyDataSetChanged();
-                        SQLite.delete(MyNotifications.class)
-                                .where(MyNotifications_Table.ID.eq(notificationModelList.get(deletedPos).getID()))
-                                .async()
-                                .execute();
+                        notificationRepository.deleteNotifications(notificationModelList.get(deletedPos).getID());
                     } else {
                         favViewChange();
                         updateFavInLocal(true);
                     }
                 }
             }
-
         }
 
         private void favViewChange() {
@@ -184,11 +184,7 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.MyVi
         }
 
         private void updateFavInLocal(boolean isFav) {
-            SQLite.update(MyNotifications.class)
-                    .set(MyNotifications_Table.IsFavorite.eq(isFav))
-                    .where(MyNotifications_Table.ID.eq(notificationModelList.get(favPos).getID()))
-                    .async()
-                    .execute();
+            notificationRepository.updateIsFavParamNotifications(notificationModelList.get(favPos).getID(), isFav);
         }
     }
 }

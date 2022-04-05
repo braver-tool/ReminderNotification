@@ -1,5 +1,9 @@
 /*
- * Copyright 2019 ~ https://github.com/braver-tool
+ *
+ *  * Created by https://github.com/braver-tool on 11/09/20, 03:30 PM
+ *  * Copyright (c) 2022 . All rights reserved.
+ *  * Last modified 05/04/22, 11:00 AM
+ *
  */
 
 package com.android.mysimplecalendar.utils;
@@ -39,6 +43,9 @@ public class AppUtils {
     public static final String FAVORITE_REMINDER_ALERT = "Are you sure want to add this reminder in favorite?";
     public static final String NOT_EDITABLE_REMINDER_ALERT = "Can\'t edit this reminder!";
 
+    public static final String IS_ALREADY_SHOWN_ALARM_PERMISSION_INTENT = "is_already_shown_alarm_permission_intent";
+    public static final String ACTION_LOCAL_NOTIFICATION = "action_local_notification";
+
 
     public static SimpleDateFormat normal_time_format_1 = new SimpleDateFormat("h:mm a", Locale.getDefault());
 
@@ -75,9 +82,7 @@ public class AppUtils {
         try {
             final Dialog dialog = new Dialog(context);
             dialog.setContentView(R.layout.popup_alert_single_button);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-            }
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
             Window window = dialog.getWindow();
             WindowManager.LayoutParams wlp;
             if (window != null) {
@@ -104,9 +109,7 @@ public class AppUtils {
     public static void showAlertDialogWidTwoWidget(Context context, DataListener dataListener, String alertMsg) {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.popup_alert_double_button);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-        }
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
         Window window = dialog.getWindow();
         WindowManager.LayoutParams wlp;
         if (window != null) {

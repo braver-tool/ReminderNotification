@@ -1,3 +1,7 @@
 <component name="CopyrightManager">
-  <settings default="Copyright - braver-tool" />
+  <settings>
+    <module2copyright>
+      <element module="All" copyright="Reminder_profile" />
+    </module2copyright>
+  </settings>
 </component>

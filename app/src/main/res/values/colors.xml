@@ -7,23 +7,11 @@
     <color name="colorPrimary">#E43F3F</color>
     <color name="colorPrimaryDark">#E12929</color>
     <color name="colorAccent">#CC1D1D</color>
-    <color name="color_half_red">#FA3939</color>
-    <color name="color_ligt_red">#FD8282</color>
-    <color name="border_color">#02AA99</color>
-    <color name="darkGray">#AAABAF</color>
     <color name="white">#ffffff</color>
-    <color name="delete_color">#14b9c4</color>
     <color name="grey_six">#666666</color>
-    <color name="blue">#1b3d74</color>
-    <color name="grey_title">#2D2D2D</color>
 
 
-    <color name="black">#000000</color>
     <color name="jet">#222222</color>
     <color name="oil">#333333</color>
     <color name="monsoon">#777777</color>
-    <color name="jumbo">#888888</color>
-    <color name="aluminum">#999999</color>
-    <color name="base">#AAAAAA</color>
-    <color name="iron">#CCCCCC</color>
 </resources>
