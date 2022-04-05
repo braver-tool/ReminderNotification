@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * Created by https://github.com/braver-tool on 11/09/20, 03:30 PM
+  ~  * Copyright (c) 2022 . All rights reserved.
+  ~  * Last modified 05/04/22, 11:00 AM
+  ~  */
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- Set the Background Image-->
+    <item
+        android:width="40dp"
+        android:height="40dp"
+        android:gravity="center">
+        <bitmap
+            android:gravity="fill_horizontal|fill_vertical"
+            android:src="@drawable/icon_splash_clock" />
+    </item>
+</layer-list>

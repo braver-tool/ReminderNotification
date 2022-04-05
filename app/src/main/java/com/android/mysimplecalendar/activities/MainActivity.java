@@ -1,42 +1,48 @@
 /*
- * Copyright 2019 ~ https://github.com/braver-tool
+ *
+ *  * Created by https://github.com/braver-tool on 11/09/20, 03:30 PM
+ *  * Copyright (c) 2022 . All rights reserved.
+ *  * Last modified 05/04/22, 11:00 AM
+ *
  */
 
 package com.android.mysimplecalendar.activities;
 
+import static com.android.mysimplecalendar.utils.AppUtils.ACTION_EDIT_REMINDER;
+import static com.android.mysimplecalendar.utils.AppUtils.PREF_SELECTED_DATE_HOME;
+import static com.android.mysimplecalendar.utils.AppUtils.PREF_SELECTED_NOTIFICATION_ID_HOME;
+
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.SpannableStringBuilder;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.splashscreen.SplashScreen;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.mysimplecalendar.R;
 import com.android.mysimplecalendar.adapter.RemindersAdapter;
 import com.android.mysimplecalendar.listener.DataListener;
-import com.android.mysimplecalendar.localdb.MyNotifications;
-import com.android.mysimplecalendar.localdb.NotificationModel;
+import com.android.mysimplecalendar.localdb.MCNotification;
+import com.android.mysimplecalendar.localdb.NotificationRepository;
 import com.android.mysimplecalendar.utils.AppUtils;
 import com.android.mysimplecalendar.utils.PreferencesManager;
 import com.android.mysimplecalendar.utils.SuperscriptFormatter;
 import com.calendar.android.droidcalendar.DroidCalendarView;
-import com.raizlabs.android.dbflow.sql.queriable.StringQuery;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-
-import static com.android.mysimplecalendar.utils.AppUtils.ACTION_EDIT_REMINDER;
-import static com.android.mysimplecalendar.utils.AppUtils.PREF_SELECTED_DATE_HOME;
-import static com.android.mysimplecalendar.utils.AppUtils.PREF_SELECTED_NOTIFICATION_ID_HOME;
 
 
 public class MainActivity extends AppCompatActivity implements DroidCalendarView.DroidCalendarListener, DataListener, View.OnClickListener {
@@ -50,18 +56,27 @@ public class MainActivity extends AppCompatActivity implements DroidCalendarView
     private final SimpleDateFormat ymd_date_format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     private final SimpleDateFormat dmy_date_format = new SimpleDateFormat("MMM dd yyyy", Locale.getDefault());
     private final SimpleDateFormat month_format = new SimpleDateFormat("MMM", Locale.getDefault());
+    private NotificationRepository notificationRepository;
+    private boolean isDataReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
+        new Handler().postDelayed(() -> isDataReady = true, 800);
+        setupOnPreDrawListenerToRootView();
         setContentView(R.layout.activity_main);
         initializeViews();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
+    @Override
+    public void onBackPressed() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            finishAndRemoveTask();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -111,7 +126,26 @@ public class MainActivity extends AppCompatActivity implements DroidCalendarView
         getStartAndEndDateOfMonth(currentCalendar);
         getAllReminderDots(currentMonthStartDate, currentMonthEndDate);
         isCurrentMonth();
+    }
 
+    /**
+     * Method handle to validate android 12 splash screen dismiss
+     */
+    private void setupOnPreDrawListenerToRootView() {
+        View mViewContent = findViewById(android.R.id.content);
+        mViewContent.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
+                    @Override
+                    public boolean onPreDraw() {
+                        if (isDataReady) {
+                            mViewContent.getViewTreeObserver().removeOnPreDrawListener(this);
+                            return true;
+                        } else {
+                            // The content is not ready; suspend.
+                            return false;
+                        }
+                    }
+                });
     }
 
     private void isCurrentMonth() {
@@ -135,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements DroidCalendarView
     private void initializeViews() {
         superscriptFormatter = new SuperscriptFormatter(new SpannableStringBuilder());
         prefManager = PreferencesManager.getInstance(this);
+        notificationRepository = new NotificationRepository(MainActivity.this);
         calendarView = findViewById(R.id.droidCalendarPicker);
         noRemindersTextView = findViewById(R.id.noRemindersTextView);
         ImageView addReminderImageView = findViewById(R.id.addReminderImageView);
@@ -160,47 +195,46 @@ public class MainActivity extends AppCompatActivity implements DroidCalendarView
         date = !prefManager.getStringValue(PREF_SELECTED_DATE_HOME).isEmpty() ? prefManager.getStringValue(PREF_SELECTED_DATE_HOME) : date;
         prefManager.setStringValue(PREF_SELECTED_DATE_HOME, date);
         prefManager.setStringValue(PREF_SELECTED_NOTIFICATION_ID_HOME, "");
-        List<NotificationModel> notificationModelList = new ArrayList<>();
-        String currentFormDate = AppUtils.getCurrentDate();
-        List<MyNotifications> myNotificationsList = new StringQuery<>(MyNotifications.class, "SELECT * From MyNotifications WHERE date(ReminderDateTime) = '" + date + "' ORDER BY datetime(ReminderDateTime) ASC").queryList();
-        for (int n = 0; n < myNotificationsList.size() && myNotificationsList.size() > 0; n++) {
-            MyNotifications myNotifications = myNotificationsList.get(n);
-            boolean isEditable = true;
-            if (((myNotifications.getReminderDateTime())).compareTo(currentFormDate) < 0) {
-                isEditable = false;
+        String finalDate = date;
+        notificationRepository.getNotificationsFromTheDate(date).observe(this, notificationList -> {
+            if (notificationList != null && notificationList.size() > 0) {
+                showValuesOnView(notificationList);
+            } else {
+                calenderRecyclerView.setVisibility(View.GONE);
+                noRemindersTextView.setVisibility(View.VISIBLE);
+                removeMarker(finalDate);
+                noRemindersTextView.setText("No events on ".concat(AppUtils.getSuperscriptFormatter(AppUtils.callDateFormatChangeMethod(finalDate, ymd_date_format, dmy_date_format))));
+                superscriptFormatter.format(noRemindersTextView);
             }
-            notificationModelList.add(new NotificationModel(myNotifications.getReminderDateTime(), myNotifications.getID(), myNotifications.getCreatedDateTime(), myNotifications.getReminderTitle(), myNotifications.getReminderDetails(), myNotifications.getReminderTime(), myNotifications.isFavorite(), isEditable, false));
-        }
-        if (notificationModelList.size() > 0) {
-            noRemindersTextView.setVisibility(View.GONE);
-            calenderRecyclerView.setVisibility(View.VISIBLE);
-            RemindersAdapter settingsAdapter = new RemindersAdapter(this, this, notificationModelList);
-            calenderRecyclerView.setAdapter(settingsAdapter);
-        } else {
-            calenderRecyclerView.setVisibility(View.GONE);
-            noRemindersTextView.setVisibility(View.VISIBLE);
-            removeMarker(date);
-            noRemindersTextView.setText("No events on ".concat(AppUtils.getSuperscriptFormatter(AppUtils.callDateFormatChangeMethod(date, ymd_date_format, dmy_date_format))));
-            superscriptFormatter.format(noRemindersTextView);
-        }
+        });
+    }
+
+    private void showValuesOnView(List<MCNotification> notificationModelList) {
+        noRemindersTextView.setVisibility(View.GONE);
+        calenderRecyclerView.setVisibility(View.VISIBLE);
+        RemindersAdapter settingsAdapter = new RemindersAdapter(this, notificationRepository, this, notificationModelList);
+        calenderRecyclerView.setAdapter(settingsAdapter);
     }
 
     private void getAllReminderDots(String startDate, String endDate) {
         try {
-            List<MyNotifications> myNotificationsList = new StringQuery<>(MyNotifications.class, "SELECT strftime('%Y-%m-%d', ReminderDateTime) as ReminderDateTime from MyNotifications Where date(ReminderDateTime) BETWEEN '" + startDate + "' AND '" + endDate + "' GROUP BY date(ReminderDateTime) ORDER BY datetime(CreatedDateTime) ASC").queryList();
-            for (int n = 0; n < myNotificationsList.size() && myNotificationsList.size() > 0; n++) {
-                Date date1 = null;
-                try {
-                    date1 = ymd_date_format.parse(myNotificationsList.get(n).getReminderDateTime());
-                } catch (ParseException e) {
-                    e.printStackTrace();
+            notificationRepository.getNotificationsForDots(startDate, endDate).observe(this, notificationList -> {
+                if (notificationList != null && notificationList.size() > 0) {
+                    for (int n = 0; n < notificationList.size(); n++) {
+                        Date date1 = null;
+                        try {
+                            date1 = ymd_date_format.parse(notificationList.get(n).getReminderDateTime());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Calendar calendar1 = Calendar.getInstance();
+                        calendar1.setTime(Objects.requireNonNull(date1));
+                        if (calendar1.get(Calendar.MONTH) == currentCalendar.get(Calendar.MONTH)) {
+                            calendarView.addMarkerInCalendarView(calendar1.getTime());
+                        }
+                    }
                 }
-                Calendar calendar1 = Calendar.getInstance();
-                calendar1.setTime(Objects.requireNonNull(date1));
-                if (calendar1.get(Calendar.MONTH) == currentCalendar.get(Calendar.MONTH)) {
-                    calendarView.addMarkerInCalendarView(calendar1.getTime());
-                }
-            }
+            });
         } catch (Exception e) {
             AppUtils.printLogConsole("##getAllReminderDots", "----->" + e.getMessage());
         }
@@ -221,5 +255,4 @@ public class MainActivity extends AppCompatActivity implements DroidCalendarView
             AppUtils.printLogConsole("##removeMarker", "----->" + e.getMessage());
         }
     }
-
 }

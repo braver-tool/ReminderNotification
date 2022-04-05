@@ -10,14 +10,12 @@
     android:layout_height="fill_parent">
 
     <LinearLayout
-        android:id="@+id/deleteCustomDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/customDialogDeleteCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="12sp"

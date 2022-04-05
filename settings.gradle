@@ -1,2 +1,25 @@
-include ':app', ':calendar'
-rootProject.name = 'MySimpleCalendar'
+/*
+ *
+ *  * Created by https://github.com/braver-tool on 11/09/20, 03:30 PM
+ *  * Copyright (c) 2022 . All rights reserved.
+ *  * Last modified 05/04/22, 11:00 AM
+ *
+ */
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+rootProject.name = "ReminderNotification"
+include ':app',':calendar'

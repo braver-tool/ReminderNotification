@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * Created by https://github.com/braver-tool on 11/09/20, 03:30 PM
+  ~  * Copyright (c) 2022 . All rights reserved.
+  ~  * Last modified 05/04/22, 11:00 AM
+  ~  */
+  -->
+
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowSplashScreenBackground">#E43F3F</item>
+        <!--        provide animatedly drawable-->
+        <item name="android:windowSplashScreenAnimatedIcon">
+            @drawable/splash_icon_12
+        </item>
+      <!--  <item name="postSplashScreenTheme">@style/AppTheme</item>-->
+    </style>
+</resources>

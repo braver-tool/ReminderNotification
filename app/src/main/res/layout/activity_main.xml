@@ -19,7 +19,6 @@
         android:background="@drawable/splash_bg_grad">
 
         <TextView
-            android:id="@+id/myReminderTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
